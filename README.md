@@ -23,3 +23,6 @@ in this order:
 
 
 22/04/21 - Front end start, react router set. App beginning to feel real.
+
+25/04/21 - Project Structure organized, just spent 1 hour fighting with what I can only assume is
+the event loop working in tandem with react to make my life harder.

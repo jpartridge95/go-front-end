@@ -6,6 +6,7 @@ import MapBox from "./MapBox"
 const ReviewForm = () => {
 
     const [score, setScore] = useState(3)
+    const [latLng, setLatLng] = useState(null)
 
     const updateScore = (e) => {
         e.preventDefault();
@@ -13,6 +14,14 @@ const ReviewForm = () => {
         setScore(newScore)
     }
 
+    const updateLatLng = (e) => {
+        setLatLng(e)
+    }
+
+    useEffect(() => {
+        setLatLng(latLng)
+        console.log(latLng)
+    }, [latLng])
     // update lat/long func(e) => state(e.target.loc)
 
     return (
@@ -22,7 +31,7 @@ const ReviewForm = () => {
             <label>Score</label>
             <input type="file" />
             <StarField starRating={score} updateScore={updateScore} />
-            <MapBox />
+            <MapBox latLng={updateLatLng}/>
             <SubmitFormButton text="Submit Review"/>
         </form>
     )
