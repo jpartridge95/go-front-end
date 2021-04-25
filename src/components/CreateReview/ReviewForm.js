@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SubmitFormButton from '../Elements/SubmitFormButton';
 import StarField from './StarField';
 import MapBox from "./MapBox"
+import CurrencySelector from './CurrencySelector';
 
 const ReviewForm = () => {
 
@@ -26,12 +27,20 @@ const ReviewForm = () => {
 
     return (
         <form>
-            <label>Name</label>
+            <label>Product name</label>
             <input type="text"></input>
             <label>Score</label>
-            <input type="file" />
             <StarField starRating={score} updateScore={updateScore} />
+            <label>Price Paid</label>
+            <input type="number" ></input>
+            <label> $ </label>
+            <CurrencySelector />
             <MapBox latLng={updateLatLng}/>
+            <label>Name of store</label>
+            <input type="text" ></input>
+            <label>Full review</label>
+            <textarea></textarea>
+            <input type="file" ></input>
             <SubmitFormButton text="Submit Review"/>
         </form>
     )
