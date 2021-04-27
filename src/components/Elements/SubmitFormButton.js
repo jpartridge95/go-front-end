@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
-const SubmitFormButton = ({ text }) => {
+const SubmitFormButton = ({ text, action }) => {
+
+    const actionChain = (e) => {
+        if (e.keyCode === "Enter") {
+            return action(e)
+        }
+    }
 
     return (
-        <button>{text}</button>
+        <button onKeyDown={actionChain} onClick={action}>{text}</button>
     )
 }
 

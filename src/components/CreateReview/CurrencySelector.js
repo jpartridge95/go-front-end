@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-const CurrencySelector = () => {
+const CurrencySelector = ({ action }) => {
 
     const [showCurrencyMenu, setShowCurrencyMenu] = useState(false)
     const [otherCurrencyMenu, setOtherCurrencyMenu] = useState(false)
-    const [selectedCurrency, setSelectedCurrency] = useState(null)
+    const [selectedCurrency, setSelectedCurrency] = useState("(no currency selected)")
 
     const changeVisibility = (e) => {
         e.preventDefault()
@@ -16,17 +16,34 @@ const CurrencySelector = () => {
         setOtherCurrencyMenu(!otherCurrencyMenu)
     }
 
+    const handleOtherCurrencyChange = (e) => {
+        setSelectedCurrency(e.target.value)
+    }
+
+    const handleCurrencyClick = (e) => {
+        e.preventDefault(e)
+        setSelectedCurrency(e.target.id)
+        setShowCurrencyMenu(!showCurrencyMenu)
+    } 
+
+    useEffect(() => {
+        action(selectedCurrency)
+    }, [selectedCurrency])
+
     return (
         <div>
             <button onClick={changeVisibility} >Currency</button>
             {!showCurrencyMenu ? null :
             <div>
-                <button>£</button>
-                <button>$</button>
-                <button>€</button>
+                <button id="£" onClick={handleCurrencyClick} >£</button>
+                <button id="$" onClick={handleCurrencyClick} >$</button>
+                <button id="€" onClick={handleCurrencyClick} >€</button>
                 <button onClick={changeOtherView} >other</button>
                 {!otherCurrencyMenu ? null :
-                <input type="text" ></input>
+                <div>
+                    <input type="text" onChange={handleOtherCurrencyChange} ></input>
+                    <button onClick={changeVisibility}>Hide</button>
+                </div>
                 }
             </div>
             }
