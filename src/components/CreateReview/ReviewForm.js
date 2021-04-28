@@ -20,6 +20,7 @@ const ReviewForm = () => {
     const [readerResult, setReaderResult] = useState()
     const [buffer, setBuffer] = useState(null)
     const [errorMessage, setErrorMessage] = useState(false)
+    const [reviewID, setReviewID] = useState(null)
 
     const handleNameChange = (e) => {
         setProductName(e.target.value)
@@ -135,7 +136,7 @@ const ReviewForm = () => {
             headers: {
                 "Content-Type":"multipart/form-data; charset=utf-8; boundary='seperator'"
             }
-        }).then((res) => console.log(res))
+        }).then((res) => setReviewID(res.data))
         .catch((err) => console.log(err))
     }
 
