@@ -5,12 +5,12 @@ import MapBox from "./MapBox"
 import CurrencySelector from './CurrencySelector';
 import axios from "axios"
 
-const ReviewForm = () => {
+const ReviewForm = ({ action }) => {
 
-    // Hooo boy! Think I'm doing state wrong 'cause this a lot of it.
+    // Hooo boy! Think I'm doing state wrong 'cause this a lot of it.["47.6062", "122.3321"]
 
     const [score, setScore] = useState(3)
-    const [latLng, setLatLng] = useState(null)
+    const [latLng, setLatLng] = useState({lat: 47.6062, lng:122.3321})
     const [selectedCurrency, setSelectedCurrency] = useState(null)
     const [productName, setProductName] = useState(null)
     const [pricePaid, setPricePaid] = useState(null)
@@ -78,8 +78,6 @@ const ReviewForm = () => {
 
             const b64encoded = btoa(result);
 
-            console.log(b64encoded)
-
             setReaderResult(b64encoded)
 
             if (errorMessage === true) {
@@ -136,7 +134,10 @@ const ReviewForm = () => {
             headers: {
                 "Content-Type":"multipart/form-data; charset=utf-8; boundary='seperator'"
             }
-        }).then((res) => setReviewID(res.data))
+        }).then((res) => {
+            // setReviewID(res.data);
+            action(res.data)
+        })
         .catch((err) => console.log(err))
     }
 

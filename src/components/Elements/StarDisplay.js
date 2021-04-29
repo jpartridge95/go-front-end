@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-const StarDisplay = () => {
+const StarDisplay = ({ score }) => {
 
     return (
-        <h1>5 star svg's will live here</h1>
+        <h1>Score: {score}/5</h1>
     )
 }
 
